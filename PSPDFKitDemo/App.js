@@ -6,28 +6,42 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {
-  Platform,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-} from 'react-native';
+import React, {Component, useRef} from 'react';
+import {Platform, SafeAreaView, Text, View} from 'react-native';
 
 import PSPDFKitView from 'react-native-pspdfkit';
 
 const DOCUMENT =
   Platform.OS === 'ios' ? 'Document.pdf' : 'file:///android_asset/Document.pdf';
 
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+// const App = () => {
+//   const pdfRef = useRef('pdfView');
+//   console.log('DOCUMENT', DOCUMENT);
+//   return (
+//     <SafeAreaView>
+//       <Text>{DOCUMENT}</Text>
+//       <View style={{flex: 1, background: 'red'}}>
+//         <PSPDFKitView
+//           document={DOCUMENT}
+//           configuration={{
+//             showThumbnailBar: 'scrollable',
+//             pageTransition: 'scrollContinuous',
+//             scrollDirection: 'vertical',
+//           }}
+//           // ref={pdfRef}
+//           // fragmentTag="PDF1"
+//           style={{flex: 1}}
+//         />
+//       </View>
+//     </SafeAreaView>
+//   );
+// };
 
-  return (
-    <SafeAreaView>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Text>Some text</Text>
+// export default App;
+
+export default class PSPDFKitDemo extends Component {
+  render() {
+    return (
       <PSPDFKitView
         document={DOCUMENT}
         configuration={{
@@ -39,8 +53,6 @@ const App = () => {
         fragmentTag="PDF1"
         style={{flex: 1}}
       />
-    </SafeAreaView>
-  );
-};
-
-export default App;
+    );
+  }
+}
